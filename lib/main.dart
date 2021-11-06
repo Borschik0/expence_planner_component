@@ -27,7 +27,36 @@ class MainScreen extends StatelessWidget {
             ),
           ),
           Card(color: Colors.lightBlue, child: Text('Chart 2')),
-          Card(color: Colors.orange, child: Text('List of transactions'))
+          Column(
+            children: transactions
+                .map((tx) => Card(
+                        child: Row(
+                      children: <Widget>[
+                        Container(
+                          child: Text(tx.amount.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.purple),),
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.purple, width: 2),
+                          ),
+                          padding: EdgeInsets.all(10),
+                        ),
+                        Column(children: <Widget>[
+                          Text(tx.title, style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.deepPurple
+                          ),),
+                          Text(tx.date.toString(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey
+                          ),)
+                        ])
+                      ],
+                    )))
+                .toList(),
+          )
         ],
       ),
     );

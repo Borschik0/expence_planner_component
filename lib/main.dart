@@ -22,12 +22,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', title: 'New Book', amount: 12.34, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'Breakfast', amount: 50.4, date: DateTime.now())
-  ];
+  final List<Transaction> _userTransactions = [];
 
   void _addnewTransactions(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -75,7 +70,6 @@ class _MainScreenState extends State<MainScreen> {
                 color: Colors.grey,
               ),
             ),
-            Card(color: Colors.lightBlue, child: Text('Chart 2')),
             TransactionList(_userTransactions),
           ],
         ),

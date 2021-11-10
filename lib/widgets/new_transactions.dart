@@ -49,7 +49,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     child: Text('Add Transaction'),
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.purple)),
+                            MaterialStateProperty.all(Theme.of(context).primaryColor)),
                   )
                 ])));
   }

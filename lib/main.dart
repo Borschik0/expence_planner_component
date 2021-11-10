@@ -4,7 +4,17 @@ import 'models/transaction.dart';
 import 'widgets/new_transactions.dart';
 import 'widgets/transaction_list.dart';
 
-void main() => runApp(MaterialApp(home: MainScreen()));
+void main() => runApp(MaterialApp(
+  theme: ThemeData(
+    primarySwatch: Colors.purple,
+    accentColor: Colors.amber,
+    fontFamily: 'Quicksand',
+    textTheme: ThemeData.light().textTheme.copyWith(headline6: TextStyle(fontFamily: 'Quicksand', fontSize: 18, fontWeight: FontWeight.bold)),
+    appBarTheme: AppBarTheme(
+      textTheme: ThemeData.light().textTheme.copyWith(headline6: TextStyle(fontFamily: 'OpenSans', fontSize: 20, fontWeight: FontWeight.bold))
+    )
+  ),
+    home: MainScreen()));
 
 class MainScreen extends StatefulWidget {
   @override

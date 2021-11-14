@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'models/transaction.dart';
+import 'widgets/chart.dart';
 import 'widgets/new_transactions.dart';
 import 'widgets/transaction_list.dart';
 
@@ -24,6 +25,13 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final List<Transaction> _userTransactions = [];
 
+  List<Transaction>? get _recentTransactions {
+    return _userTransactions.where(
+        (tx){
+          return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+        }
+    ).toList();
+  }
   void _addnewTransactions(String txTitle, double txAmount) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
@@ -64,12 +72,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              child: Card(
-                child: Text('Chart 1'),
-                color: Colors.grey,
-              ),
-            ),
+           Chart(_recentTransactions!),
             TransactionList(_userTransactions),
           ],
         ),

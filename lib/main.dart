@@ -6,15 +6,21 @@ import 'widgets/new_transactions.dart';
 import 'widgets/transaction_list.dart';
 
 void main() => runApp(MaterialApp(
-  theme: ThemeData(
-    primarySwatch: Colors.purple,
-    accentColor: Colors.amber,
-    fontFamily: 'Quicksand',
-    textTheme: ThemeData.light().textTheme.copyWith(headline6: TextStyle(fontFamily: 'Quicksand', fontSize: 18, fontWeight: FontWeight.bold)),
-    appBarTheme: AppBarTheme(
-      textTheme: ThemeData.light().textTheme.copyWith(headline6: TextStyle(fontFamily: 'OpenSans', fontSize: 20, fontWeight: FontWeight.bold))
-    )
-  ),
+    theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+            headline6: TextStyle(
+                fontFamily: 'Quicksand',
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
+        appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)))),
     home: MainScreen()));
 
 class MainScreen extends StatefulWidget {
@@ -26,12 +32,11 @@ class _MainScreenState extends State<MainScreen> {
   final List<Transaction> _userTransactions = [];
 
   List<Transaction>? get _recentTransactions {
-    return _userTransactions.where(
-        (tx){
-          return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
-        }
-    ).toList();
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
   }
+
   void _addnewTransactions(String txTitle, double txAmount) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
@@ -72,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-           Chart(_recentTransactions!),
+            Chart(_recentTransactions!),
             TransactionList(_userTransactions),
           ],
         ),

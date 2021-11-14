@@ -20,7 +20,8 @@ void main() => runApp(MaterialApp(
                 headline6: TextStyle(
                     fontFamily: 'OpenSans',
                     fontSize: 20,
-                    fontWeight: FontWeight.bold)))),
+                    fontWeight: FontWeight.bold),
+            button: TextStyle(color: Colors.white)))),
     home: MainScreen()));
 
 class MainScreen extends StatefulWidget {

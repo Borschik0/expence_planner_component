@@ -9,6 +9,7 @@ void main() => runApp(MaterialApp(
     theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        errorColor: Colors.red,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
             headline6: TextStyle(
@@ -38,12 +39,12 @@ class _MainScreenState extends State<MainScreen> {
     }).toList();
   }
 
-  void _addnewTransactions(String txTitle, double txAmount) {
+  void _addNewTransactions(String txTitle, double txAmount, DateTime txDate) {
     final newTx = Transaction(
         id: DateTime.now().toString(),
         title: txTitle,
         amount: txAmount,
-        date: DateTime.now());
+        date: txDate);
     setState(() {
       _userTransactions.add(newTx);
     });
@@ -55,12 +56,17 @@ class _MainScreenState extends State<MainScreen> {
         builder: (_) {
           return GestureDetector(
             onTap: () {},
-            child: NewTransaction(_addnewTransactions),
+            child: NewTransaction(_addNewTransactions),
             behavior: HitTestBehavior.opaque,
           );
         });
   }
 
+  void _deleteTransaction(String id){
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id==id);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions!),
-            TransactionList(_userTransactions),
+            TransactionList(_userTransactions, _deleteTransaction),
           ],
         ),
       ),

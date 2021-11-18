@@ -22,7 +22,7 @@ void main() => runApp(MaterialApp(
                     fontFamily: 'OpenSans',
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
-            button: TextStyle(color: Colors.white)))),
+                button: TextStyle(color: Colors.white)))),
     home: MainScreen()));
 
 class MainScreen extends StatefulWidget {
@@ -62,30 +62,36 @@ class _MainScreenState extends State<MainScreen> {
         });
   }
 
-  void _deleteTransaction(String id){
+  void _deleteTransaction(String id) {
     setState(() {
-      _userTransactions.removeWhere((tx) => tx.id==id);
+      _userTransactions.removeWhere((tx) => tx.id == id);
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('E-Planner'),
+      actions: <Widget>[
+        IconButton(
+            onPressed: () {
+              return _startAddNewTransaction(context);
+            },
+            icon: Icon(Icons.add))
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('E-Planner'),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {
-                return _startAddNewTransaction(context);
-              },
-              icon: Icon(Icons.add))
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions!),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container(
+                height: (MediaQuery.of(context).size.height-appBar.preferredSize.height-MediaQuery.of(context).padding.top) * 0.3,
+                child: Chart(_recentTransactions!)),
+            Container(
+                height: (MediaQuery.of(context).size.height-appBar.preferredSize.height-MediaQuery.of(context).padding.top) * 0.7,
+                child: TransactionList(_userTransactions, _deleteTransaction)),
           ],
         ),
       ),

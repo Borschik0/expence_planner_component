@@ -109,7 +109,8 @@ class _MainScreenState extends State<MainScreen> {
                 mediaQuery.padding.top) *
             0.7,
         child: TransactionList(_userTransactions, _deleteTransaction));
-    final appBody = SafeArea(child:SingleChildScrollView(
+    final appBody = SafeArea(
+        child: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -117,7 +118,10 @@ class _MainScreenState extends State<MainScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Show Chart', style: Theme.of(context).textTheme.headline6,),
+                Text(
+                  'Show Chart',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
                 Switch.adaptive(
                     activeColor: Theme.of(context).accentColor,
                     value: _showChart,

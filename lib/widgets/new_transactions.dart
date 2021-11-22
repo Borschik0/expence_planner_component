@@ -46,49 +46,56 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 5,
-        child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  TextField(
-                    controller: _titleController,
-                    decoration: InputDecoration(labelText: 'Title'),
-                    onSubmitted: (_) => _submitData(),
-                  ),
-                  TextField(
-                    controller: _amountController,
-                    decoration: InputDecoration(labelText: 'Amount'),
-                    keyboardType: TextInputType.number,
-                    onSubmitted: (_) => _submitData(),
-                  ),
-                  Container(
-                    height: 70,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(child: Text('Picked Date: ${DateFormat.yMd().format(_selectedDate)}')),
-                        ElevatedButton(
-                          onPressed: _presentDatePicker,
-                          child: Text(
-                            'Choose Date',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  Theme.of(context).primaryColor)),
-                        )
-                      ],
+    return SingleChildScrollView(
+      child: Card(
+          elevation: 5,
+          child: Container(
+              padding: EdgeInsets.only(
+                left: 10,
+                top: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom +10
+              ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(
+                      controller: _titleController,
+                      decoration: InputDecoration(labelText: 'Title'),
+                      onSubmitted: (_) => _submitData(),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _submitData(),
-                    child: Text('Add Transaction'),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).primaryColor)),
-                  )
-                ])));
+                    TextField(
+                      controller: _amountController,
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      keyboardType: TextInputType.number,
+                      onSubmitted: (_) => _submitData(),
+                    ),
+                    Container(
+                      height: 70,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(child: Text('Picked Date: ${DateFormat.yMd().format(_selectedDate)}')),
+                          ElevatedButton(
+                            onPressed: _presentDatePicker,
+                            child: Text(
+                              'Choose Date',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Theme.of(context).primaryColor)),
+                          )
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _submitData(),
+                      child: Text('Add Transaction'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).primaryColor)),
+                    )
+                  ]))),
+    );
   }
 }
